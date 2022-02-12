@@ -1,0 +1,89 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+
+@section Navbar {
+    <partial name="_EmptyNavbar"/>
+}
+
+<div class="columns is-centered is-vcentered top-spacing mx-2" style="height: 77vh">
+    <div class="column is-one-third is-hidden-mobile pr-5">
+        <img src="~/media/sammy-downloading.png"/>
+    </div>
+    <section class="column is-one-third is-two-thirds-tablet">
+        <h4 class="is-size-4 mb-2">Welcome Back!</h4>
+        <small class="form-subtitle mt-0">Enter your credentials to sign in.</small>
+
+        <hr>
+
+        <form id="login-form" class="mt-4" method="post">
+
+            <div asp-validation-summary="ModelOnly" class="notification py-0 is-vcentered is-danger is-light my-3"></div>
+
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input asp-for="Input.Email" class="input" id="email" type="email" placeholder="bobby@bobbying.com" value="">
+                    <span asp-validation-for="Input.Email" class="validation-error"></span>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input asp-for="Input.Password" class="input password-input" id="password-input" type="password" placeholder="Password"/>
+                    <span asp-validation-for="Input.Password" class="validation-error"></span>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-key"></i>
+                    </span>
+                    <span class="icon is-small is-right password-eye">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="is-flex is-justify-content-space-between">
+                <div class="checkbox is-field-content">
+                    <label class="checkbox" asp-for="Input.RememberMe">
+                        <input asp-for="Input.RememberMe"/>
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+                
+                <a class="is-field-content" id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+            </div>
+
+            <button type="button" class="button is-link is-fullwidth mt-4" id="login">Log in</button>
+
+            <div class="has-text-centered mt-4">
+                <a class="is-field-content" asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Don't have on account? Sign up!</a>
+            </div>
+
+            <input type="hidden" id="reCaptchaToken" asp-for="Input.Token"/>
+        </form>
+    </section>
+
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+
+    <script src="https://www.google.com/recaptcha/api.js?render=@(Model.reCaptchaKey)"></script>
+    <script>
+        $("#login").click(() => {
+            grecaptcha.execute('@(Model.reCaptchaKey)', { action: 'submit' }).then(function (token) {
+                console.log(token);
+                $("#reCaptchaToken").val(token)
+                $("#login-form").submit()
+            });
+        })
+    </script>
+}

@@ -1,0 +1,63 @@
+﻿@page
+@model LoginWith2faModel
+@{
+    ViewData["Title"] = "Two-factor authentication";
+}
+
+@section Navbar
+{
+    <partial name="_EmptyNavbar"/>
+}
+
+<div class="columns is-centered mt-5">
+    <div class="column is-two-fifths">
+        <h4 class="is-size-4 mb-2">Two-Factor Authentication</h4>
+        <small class="form-subtitle mt-0">A token has been sent to your email for two-factor authentication</small>
+        <hr>
+        <form method="post" asp-route-returnUrl="@Model.ReturnUrl" id="login-form">
+            <input asp-for="RememberMe" type="hidden"/>
+            <div asp-validation-summary="ModelOnly" class="notification py-0 is-vcentered is-danger is-light my-3"></div>
+
+            <div class="field">
+                <label class="label">Token</label>
+                <div class="control has-icons-left has-icons-right">
+                    <input asp-for="Input.TwoFactorCode" class="input">
+                    <span asp-validation-for="Input.TwoFactorCode" class="validation-error"></span>
+                    <span class="icon is-small is-left">
+                        <i class="fas fa-key"></i>
+                    </span>
+                </div>
+            </div>
+
+            <div class="is-flex is-justify-content-space-between">
+                <div class="checkbox is-field-content">
+                    <label class="checkbox" asp-for="Input.RememberMachine">
+                        <input asp-for="Input.RememberMachine"/>
+                        @Html.DisplayNameFor(m => m.Input.RememberMachine)
+                    </label>
+                </div>
+            </div>
+            
+            <input type="hidden" id="reCaptchaToken" asp-for="Input.Token"/>
+            <button type="button" id="login" class="button is-link mt-4 is-fullwidth">Log in</button>
+            
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"/>
+    <script src="https://www.google.com/recaptcha/api.js?render=@(Model.reCaptchaKey)"></script>
+    
+    <script>
+        $("#login").click(() => {
+            grecaptcha.execute('@(Model.reCaptchaKey)', { action: 'submit' }).then(function (token) {
+                console.log(token);
+                $("#reCaptchaToken").val(token)
+                $("#login-form").submit()
+            });
+        })
+    </script>
+    
+}

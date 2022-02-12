@@ -1,0 +1,91 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Profile";
+    Layout = "/Pages/Shared/_Layout.cshtml";
+}
+
+@section Navbar
+{
+    <partial name="_Navbar"/>
+}
+
+<div class="columns mt-5 mx-2">
+    <div class="column is-one-fifth">
+        <partial name="_ManageNav"/>
+    </div>
+    <div class="column">
+        <h4 class="is-size-4 mb-2">Profile</h4>
+        <small class="form-subtitle mt-0">View the details that you have entered on registration.</small>
+        <hr>
+        <div class="columns is-centered mt-3">
+            <div class="column is-3 mr-4">
+                <img src="~/profile/@(Model.CurrentUser.Id).png"/>
+            </div>
+
+            <div class="column">
+                <div class="field is-horizontal">
+                    <div class="field-body">
+                        <div class="field">
+                            <label class="label">First Name</label>
+                            <p class="control is-expanded has-icons-left">
+                                <input class="input is-fullwidth" value="@Model.CurrentUser.FirstName" disabled="" type="text">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <label class="label">Last Name</label>
+                            <p class="control is-expanded has-icons-left">
+                                <input class="input is-fullwidth" value="@Model.CurrentUser.LastName" disabled="" type="text">
+                                <span class="icon is-small is-left">
+                                    <i class="fas fa-user"></i>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input value="@Model.CurrentUser.Email" disabled="" class="input" id="email" type="email">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label">Date of Birth</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input value="@Model.CurrentUser.DateOfBirth.ToShortDateString()" class="input" disabled="">
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-calendar"></i>
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="field">
+                    <label class="label">Credit Card Number</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input value="@Model.CurrentUser.CardNumber" disabled="" class="input" type="text"/>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-credit-card"></i>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts
+{
+    <script>
+        $("#profile").addClass("is-active")
+    </script>
+}

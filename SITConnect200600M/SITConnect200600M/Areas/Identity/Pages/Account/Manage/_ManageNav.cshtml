@@ -1,0 +1,15 @@
+﻿@inject SignInManager<SITConnect200600MUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<aside>
+    <p class="menu-label">Settings</p>
+    <ul class="menu-list">
+        <li>
+            <a id="profile" asp-page="./Index">Profile</a>
+        </li>
+        <li>
+            <a id="change-password" asp-page="./ChangePassword">Change Password</a>
+        </li>
+    </ul>
+</aside>

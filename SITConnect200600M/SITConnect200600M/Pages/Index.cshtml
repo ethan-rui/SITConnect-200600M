@@ -1,0 +1,19 @@
+@page
+@model IndexModel
+@using SITConnect200600M.Areas.Identity.Data
+@using Microsoft.AspNetCore.Identity
+@inject SignInManager<SITConnect200600MUser> SignInManager
+@inject UserManager<SITConnect200600MUser> UserManager
+
+@{
+    ViewData["Title"] = "Home page";
+}
+
+@section Navbar {
+    <partial name="_Navbar"/>
+}
+
+<div class="has-text-centered mt-5">
+    <h1 class="display-4">Welcome</h1>
+    <p>Application Security Project made by Ethan Ng - 200600M</p>
+</div>

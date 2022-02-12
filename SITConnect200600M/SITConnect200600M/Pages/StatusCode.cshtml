@@ -1,0 +1,32 @@
+﻿@page
+@model SITConnect200600M.Pages.StatusCode
+
+@{
+    Layout = "Shared/_Layout";
+    ViewData["Title"] = Model.OriginalStatusCode;
+}
+
+@section Navbar
+{
+    <partial name="Shared/_EmptyNavbar"/>
+}
+
+
+<div class="columns is-vcentered is-centered" style="height: 75vh">
+    <div class="column is-one-third mr-6">
+        <img src="~/media/sammy-17.png" alt=""/>
+    </div>
+    <div class="column is-one-third">
+        <h1 style="font-size: 4rem">
+            <strong>
+                @Model.ErrorHeading
+            </strong>
+        </h1>
+
+        <p class="mb-4">
+            <strong class="is-size-3">Error @Model.OriginalStatusCode.</strong>
+        </p>
+        <p class="mb-4 is-size-5">@Model.ErrorMessage</p>
+        <a href="/" class="button is-link">Back to home</a>
+    </div>
+</div>

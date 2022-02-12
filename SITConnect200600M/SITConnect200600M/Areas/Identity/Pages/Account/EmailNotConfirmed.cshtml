@@ -1,0 +1,18 @@
+﻿@page
+@model SITConnect200600M.Areas.Identity.Pages.Account.EmailNotConfirmed
+
+@{
+    ViewData["Title"] = "Email Not Confirmed";
+}
+
+
+<partial name="_EmptyNavbar"/>
+
+<div class="columns is-centered is-vcentered" style="min-height: 60vh;">
+    <div class="column has-text-centered is-one-third">
+        <img src="~/media/sammy-envelope.png" style="max-width: 300px"/>
+        <h1 style="font-weight: 700">Please verify your email</h1>
+        <p>A verification link has been sent to your email you used to register for this site, you need to verify your email to continue.</p>
+        <a class="button is-link mt-2" href="/Identity/Account/Login">Click here to login!</a>
+    </div>
+</div>

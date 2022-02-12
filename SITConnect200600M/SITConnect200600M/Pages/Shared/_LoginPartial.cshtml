@@ -1,0 +1,48 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using SITConnect200600M.Areas.Identity.Data
+
+@inject SignInManager<SITConnect200600MUser> SignInManager
+@inject UserManager<SITConnect200600MUser> UserManager
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+            <i class="fas fa-user mr-2"></i> @User.FindFirst("FullName").Value
+        </a>
+
+        <div class="navbar-dropdown">
+            <a class="navbar-item" asp-area="Identity" asp-page="/Account/Manage/Index">
+               Settings 
+            </a>
+            <form id="logout-form" class="navbar-item" asp-area="Identity" asp-page="/Account/Logout"></form>
+            <a class="navbar-item" id="logout-button" onclick="logOut()">Logout</a>
+        </div>
+    </div>
+}
+else
+{
+    <div class="navbar-item">
+        <div class="buttons">
+            <a asp-area="Identity" asp-page="/Account/Register" class="button is-primary">
+                <strong>Sign up</strong>
+            </a>
+            <a asp-area="Identity" asp-page="/Account/Login" class="button is-light">
+                Log in
+            </a>
+        </div>
+    </div>
+}
+
+<script>
+    function logOut(){
+        $("#logout-form").submit();
+    }
+</script>
+
+<style>
+    #logout-button:hover{
+        background-color: #feecf0;
+        color: #cc0f35;
+    }
+</style>

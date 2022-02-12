@@ -1,0 +1,13 @@
+﻿@model string
+
+@if (!String.IsNullOrEmpty(Model))
+{
+    var statusMessageClass = Model.StartsWith("Error") ? "is-danger" : "is-success";
+    <div class="notification @statusMessageClass is-vcentered is-light my-3 py-0">
+        <ul>
+            <li>
+                @Model
+            </li>
+        </ul>
+    </div>
+}

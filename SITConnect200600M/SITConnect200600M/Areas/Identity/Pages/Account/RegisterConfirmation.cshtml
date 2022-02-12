@@ -1,0 +1,16 @@
+﻿@page
+@model RegisterConfirmationModel
+@{
+    ViewData["Title"] = "Register Confirmation";
+}
+
+<partial name="_EmptyNavbar"/>
+
+<div class="columns is-centered is-vcentered" style="min-height: 60vh;">
+    <div class="column has-text-centered is-one-third">
+        <img src="~/media/sammy-envelope.png" style="max-width: 300px"/>
+        <h1 style="font-weight: 700">Thank you!</h1>
+        <p>A confirmation link has been sent to your email! You need to verify your email before you have access to the site</p>
+        <a class="button is-link mt-2" href="/Identity/Account/Login">Click here to login!</a>
+    </div>
+</div>
