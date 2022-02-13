@@ -79,7 +79,7 @@ namespace SITConnect200600M.Areas.Identity.Pages.Account
             var currentUser = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (currentUser == null)
             {
-                throw new InvalidOperationException($"Unable to load two-factor authentication user.");
+                return StatusCode(401);
             }
 
             // Creating 2FA token and sending it
